@@ -10,8 +10,8 @@ public class TestaRemocao {
 		ConnectionFactory factory = new ConnectionFactory();
 		Connection connection = factory.recuperarConexao();
 
-		PreparedStatement stm = connection.prepareStatement("DELETE FROM PRODUTO WHERE ID = ?");
-		stm.setInt(1, 9);
+		PreparedStatement stm = connection.prepareStatement("DELETE FROM PRODUTO WHERE ID > ?");
+		stm.setInt(1, 4);
 		stm.execute();
 
 		Integer linhasModificadas = stm.getUpdateCount();
