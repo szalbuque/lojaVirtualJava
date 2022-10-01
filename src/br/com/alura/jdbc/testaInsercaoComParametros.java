@@ -16,11 +16,20 @@ public class testaInsercaoComParametros {
 		Connection connection = factory.recuperarConexao();
 		//Assumimos a responsabilidade por fazer o commit das transações
 		connection.setAutoCommit(false);
-		PreparedStatement stm = connection.prepareStatement("INSERT INTO PRODUTO (nome, descricao) VALUES (?,?)",Statement.RETURN_GENERATED_KEYS);
-		adicionaRegistro("Projetor", "Datashow", stm);
-		adicionaRegistro("Tela", "Tela de projeção", stm);
-		stm.close();
-		connection.close();
+		
+		try {
+			PreparedStatement stm = connection.prepareStatement("INSERT INTO PRODUTO (nome, descricao) VALUES (?,?)",Statement.RETURN_GENERATED_KEYS);
+			adicionaRegistro("Projetor", "Datashow", stm);
+			adicionaRegistro("Tela", "Tela de projeção", stm);
+			connection.commit();
+			stm.close();
+			connection.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Rollback executado");
+			connection.rollback();
+		}
+		
 
 	}
 
