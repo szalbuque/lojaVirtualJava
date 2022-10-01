@@ -1,8 +1,8 @@
 package br.com.alura.jdbc;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class TestaListagem {
 
@@ -10,8 +10,8 @@ public class TestaListagem {
 		ConnectionFactory conFact = new ConnectionFactory();
 		Connection con = conFact.recuperarConexao();
 
-		Statement stm = con.createStatement();
-		stm.execute("SELECT * FROM PRODUTO");
+		PreparedStatement stm = con.prepareStatement("SELECT * FROM PRODUTO");
+		stm.execute();
 
 		ResultSet rst = stm.getResultSet();
 		while(rst.next()) {
