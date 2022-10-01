@@ -12,11 +12,18 @@ public class testaInsercaoComParametros {
 
 	public static void main(String[] args) throws SQLException {
 		//Apesar de haver um erro na string abaixo, o prepareStatement vai contornar o erro antes de rodar o sql
-		String nome = "Fone'";
-		String descricao = "Fone sem microfone";
+		String nome = "Luminária";
+		String descricao = "Luminária de LED";
 		ConnectionFactory factory = new ConnectionFactory();
 		Connection connection = factory.recuperarConexao();
 		PreparedStatement stm = connection.prepareStatement("INSERT INTO PRODUTO (nome, descricao) VALUES (?,?)",Statement.RETURN_GENERATED_KEYS);
+		adicionaRegistro(nome, descricao, stm);
+		stm.close();
+		connection.close();
+
+	}
+
+	private static void adicionaRegistro(String nome, String descricao, PreparedStatement stm) throws SQLException {
 		stm.setString(1, nome);
 		stm.setString(2, descricao);
 		stm.execute();
@@ -27,9 +34,6 @@ public class testaInsercaoComParametros {
 			System.out.println("O id criado foi: " + id);
 		}
 		rst.close();
-		stm.close();
-		connection.close();
-
 	}
 
 }

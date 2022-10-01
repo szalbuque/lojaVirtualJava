@@ -9,6 +9,6 @@ public class ConnectionFactory {
 		return DriverManager
 				.getConnection
 				("jdbc:mysql://localhost/loja_virtual?useTimezone=true&serverTimezone=UTC",
-						"root", "Sa180907*m");
+						"root", "root");
 	}
 }
